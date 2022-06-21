@@ -1,37 +1,37 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 // import * as moment from 'moment';
-let numeral = require("numeral");
+let numeral = require('numeral')
 
 const TMDBLogo =
-  "https://www.themoviedb.org/assets/2/v4/logos/312x276-primary-green-74212f6247252a023be0f02a5a45794925c3689117da9d20ffe47742a665c518.png";
-const moviePosterBaseUrl = "https://image.tmdb.org/t/p/w370_and_h556_bestv2";
-let backdropImg;
+  'https://www.themoviedb.org/assets/2/v4/logos/312x276-primary-green-74212f6247252a023be0f02a5a45794925c3689117da9d20ffe47742a665c518.png'
+const moviePosterBaseUrl = 'https://image.tmdb.org/t/p/w370_and_h556_bestv2'
+let backdropImg
 
 const getFormattedDate = (dateString) => {
-  if (!dateString) return "N/A";
-  const dateArr = dateString.split("-");
-  const date = new Date(dateArr[0], dateArr[1], dateArr[2]);
-  return new Intl.DateTimeFormat("en", {
-    year: "numeric",
-    month: "short",
-    day: "2-digit"
-  }).format(date);
-};
+  if (!dateString) return 'N/A'
+  const dateArr = dateString.split('-')
+  const date = new Date(dateArr[0], dateArr[1], dateArr[2])
+  return new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit'
+  }).format(date)
+}
 
 class MovieCard extends Component {
   render() {
-    let data = this.props.movie;
+    let data = this.props.movie
 
     let posterIMG = moviePosterBaseUrl + data.poster_path,
       genres = data.genre_ids,
-      genresList = nestedDataToString(genres);
-    backdropImg = "https://image.tmdb.org/t/p/original" + data.backdrop_path;
+      genresList = nestedDataToString(genres)
+    backdropImg = 'https://image.tmdb.org/t/p/original' + data.backdrop_path
 
-    console.log("data is: " + JSON.stringify(data));
+    console.log('data is: ' + JSON.stringify(data))
 
     if (data.poster_path === null) {
       posterIMG =
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSols5HZxlQWyS9JY5d3_L9imbk0LiziHiyDtMZLHt_UNzoYUXs2g";
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSols5HZxlQWyS9JY5d3_L9imbk0LiziHiyDtMZLHt_UNzoYUXs2g'
     }
 
     return (
@@ -44,18 +44,18 @@ class MovieCard extends Component {
           <div className="additional-details">
             <div className="row nopadding release-details">
               <div className="col-sm-6">
-                {" "}
+                {' '}
                 Original Release:
                 <span className="meta-data">
-                  {" "}
+                  {' '}
                   {getFormattedDate(data.release_date)}
                 </span>
               </div>
               <div className="col-sm-6">
-                {" "}
-                Vote Average:{" "}
+                {' '}
+                Vote Average:{' '}
                 <span className="meta-data">
-                  {data.vote_average ? data.vote_average : "N/A"}
+                  {data.vote_average ? data.vote_average : 'N/A'}
                 </span>
               </div>
             </div>
@@ -70,24 +70,24 @@ class MovieCard extends Component {
           />
         </div>
       </div>
-    );
+    )
   }
 
   componentDidUpdate() {
-    document.body.style.backgroundImage = "url(" + backdropImg + ")";
+    document.body.style.backgroundImage = 'url(' + backdropImg + ')'
   }
 }
 
 function nestedDataToString(nestedData) {
   let nestedArray = [],
-    resultString;
+    resultString
   if (nestedData !== undefined) {
     nestedData.forEach(function (item) {
-      nestedArray.push(item.name);
-    });
+      nestedArray.push(item.name)
+    })
   }
-  resultString = nestedArray.join(", "); // array to string
-  return resultString;
+  resultString = nestedArray.join(', ') // array to string
+  return resultString
 }
 
-export default MovieCard;
+export default MovieCard
