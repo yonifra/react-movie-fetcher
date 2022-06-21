@@ -79,15 +79,14 @@ class MovieCard extends Component {
 }
 
 function nestedDataToString(nestedData) {
-  let nestedArray = [],
-    resultString
-  if (nestedData !== undefined) {
+  const nestedArray = []
+  if (nestedData) {
     nestedData.forEach(function (item) {
       nestedArray.push(item.name)
     })
   }
-  resultString = nestedArray.join(', ') // array to string
-  return resultString
+
+  return nestedArray.join(', ')
 }
 
 export default MovieCard
